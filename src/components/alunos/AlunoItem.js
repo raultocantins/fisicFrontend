@@ -1,16 +1,18 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
+import { Link } from "react-router-dom";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import './AlunoItem.css'
 export default function AlunoItem(props) {
   var data = props.data;
   return (
     <React.Fragment>
-      <Card>
+      <Card >
         <CardActionArea>
           <CardMedia
             component="img"
@@ -20,22 +22,41 @@ export default function AlunoItem(props) {
             title="Contemplative Reptile"
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h6" >
               {data.name}{" "}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+            <Typography variant="body2" color="textSecondary" component="p" className="typography">            
+              <Button size="small" variant='contained' color='primary'>
+               <span style={{fontSize:'9px'}}> Peso : {data.weight}</span> 
+              </Button>
+
+              <Button size="small" variant='contained' color='primary'>
+               <span style={{fontSize:'9px'}}> Gordura : {data.fat}</span> 
+              </Button>
+
+              <Button size="small" variant='contained' color='primary'>
+               <span style={{fontSize:'9px'}}> Pressão : {data.pressure}</span> 
+              </Button>
+
+              <Button size="small" variant='contained' color='primary'>
+               <span style={{fontSize:'9px'}}> Altura : {data.height}</span> 
+              </Button>
+
+             
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
+        
           <Button variant="contained" size="small" color="secondary">
             Renovar
           </Button>
+          <Link to={`/register/aluno/key=update&id=${data._id}`}>
+
           <Button size="small" color="primary">
             Alterar
           </Button>
+          </Link>
         </CardActions>
       </Card>
     </React.Fragment>

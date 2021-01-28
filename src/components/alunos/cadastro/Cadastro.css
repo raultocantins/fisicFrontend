@@ -1,0 +1,11 @@
+.cadastro{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+.textfield{
+   margin: 10px!important;
+   width: 400px;
+}

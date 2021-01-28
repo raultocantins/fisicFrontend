@@ -1,30 +1,30 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Axios from "axios";
 import "./Alunos.css";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import AlunoItem from "./AlunoItem";
-
+import Cadastro from "./cadastro/Cadastro";
 import Button from "@material-ui/core/Button";
 export default class Alunos extends React.Component {
   state = {
-    alunos: [
-      { name: "Douglas dos santos" },
-      { name: "Elenilson beltrão" },
-      { name: "alex" },
-      { name: "alex" },
-      { name: "alex" },
-      { name: "alex" },
-      { name: "alex" },
-      { name: "alex" },
-      { name: "alex" },
-      { name: "alex" },
-      { name: "alex" },
-      { name: "alex" },
-    ],
+    alunos: [],
   };
-  constructor(props) {
-    super(props);
+
+  componentDidMount() {
+    var baseUrl = "http://localhost:4000/alunos";
+    Axios.get(baseUrl)
+      .then((res) => {
+        this.setState({
+          alunos: res.data,
+
+        });
+   
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -32,7 +32,7 @@ export default class Alunos extends React.Component {
       <Router>
         <div className="alunos">
           <div className="menu">
-            <Link to="/" exact={true}>
+            <Link to="/alunos" exact={true}>
               {" "}
               <Button variant="contained" size="large">
                 Alunos
@@ -55,13 +55,13 @@ export default class Alunos extends React.Component {
 
           <div className="alunosContent">
             <Switch>
-              <Route path="/" exact={true}>
-                <Grid container spacing={3}>
+              <Route path="/alunos" exact>
+                <Grid container spacing={2}>
                   {this.state.alunos === undefined
                     ? "Nenhuma aluno"
                     : this.state.alunos.map((e) => {
                         return (
-                          <Grid item lg={3}>
+                          <Grid item lg={3} key={e.id}>
                             <Paper>
                               <AlunoItem data={e} />
                             </Paper>
@@ -71,9 +71,9 @@ export default class Alunos extends React.Component {
                 </Grid>
               </Route>
               <Route path="/register/aluno">
-                <h1>cadastrar aluno</h1>
+                <Cadastro />
               </Route>
-              <Route path="/alunos/desempenho">
+              <Route path="/atualizar/aluno">
                 <h1>Desempenho</h1>
               </Route>
             </Switch>

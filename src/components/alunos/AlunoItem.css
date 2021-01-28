@@ -1,0 +1,11 @@
+.typography{
+    display: flex;
+    justify-content: center;
+
+      flex-wrap: wrap;  
+
+}
+
+.typography button{
+margin: 5px;
+}
