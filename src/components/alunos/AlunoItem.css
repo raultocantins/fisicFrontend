@@ -8,4 +8,16 @@
 
 .typography button{
 margin: 5px;
+width: 50px;
+}
+.typographyName{
+color: #000;
+height: 40px;
+overflow: hidden;
+
+}
+
+.linkCardAluno{
+  text-decoration: none!important;
+  outline: none!important;
 }

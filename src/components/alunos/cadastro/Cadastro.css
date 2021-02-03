@@ -1,11 +1,16 @@
 .cadastro{
     padding: 20px;
     display: flex;
-    justify-content: center;
+   justify-content: center;
     flex-wrap: wrap;
+vertical-align: top;
 
 }
 .textfield{
    margin: 10px!important;
    width: 400px;
+}
+.containerCadastro{
+    display: flex;
+    justify-content: center;
 }

@@ -1,31 +1,21 @@
 .alunos {
   height: 100%;
-
+display: flex;
+justify-content: center;
   width: 100%;
-  overflow: auto;
-  padding: 10px;
+  overflow: hidden;
+ 
 }
 
-.menu a {
-  text-decoration: none;
+.alunosContent{
+  justify-content: center;
+display: flex;
+flex-wrap: wrap;
+
+ width: 80%;
 }
-.menu button {
-  color: #fff;
-  background-color: #000;
+.gridAlunoItem{
+  width: 250px!important; 
   margin: 20px;
 
-}
-.menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 0px 0px 10px 0px;
-  
-
-}
-.alunosContent{
-
-  
- 
 }
