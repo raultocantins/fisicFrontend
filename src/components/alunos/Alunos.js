@@ -25,6 +25,21 @@ export default class Alunos extends React.Component {
         console.log(err);
       });
   }
+  
+  
+  loadingAlunos(){
+    
+    var baseUrl = "http://localhost:4000/alunos";
+    Axios.get(baseUrl)
+      .then((res) => {
+        this.setState({
+          alunos: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
@@ -39,19 +54,19 @@ export default class Alunos extends React.Component {
                       return (
                         <Paper
                           className="gridAlunoItem"
-                          key={e.id}
+                          key={e._id}
                           elevation={4}
                           variant="outlined"
                           style={
                             this.state.expToday < e.exp
                               ? {
                                   borderTop:
-                                    "4px solid  rgba(0, 128, 0, 0.705)",
+                                    "4px solid rgb(76, 175, 80)",
                                 }
-                              : { borderTop: "4px solid red" }
+                              : { borderTop: "4px solid rgb(220, 0, 78)" }
                           }
                         >
-                          <AlunoItem data={e} />
+                          <AlunoItem data={e} loadingAlunos={this.loadingAlunos}/>
                         </Paper>
                       );
                     })}

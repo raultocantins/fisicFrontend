@@ -40,7 +40,7 @@ overflow: hidden;
 
 .buttons button:hover{
     background-color: #fff!important;
-    color:#000;
+    color:rgb(105, 87, 87);
     transition: all 0.7s;
    
 }
@@ -67,13 +67,16 @@ text-decoration: none;
 }
 
 
-
+.container{
+    margin: 0px!important;
+    
+}
 
 
 @media (max-width: 600px){
     .menuMobile{
         animation-name: openAppbar;
-        animation-duration: 2s;
+        animation-duration: 1s;
         animation-fill-mode: forwards;
        
         width: 100%;
@@ -123,6 +126,12 @@ text-decoration: none;
 .buttons button{
     display: none;
 }
+.buttons button:hover {
+    background-color: transparent!important;
+    color:  #fff;
+    
+}
+
 }
 
 @keyframes openAppbar{

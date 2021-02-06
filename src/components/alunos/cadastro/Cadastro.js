@@ -87,7 +87,7 @@ export default class Cadatro extends React.Component {
       height: parseFloat(this.state.height),
       pressure: parseFloat(this.state.pressure),
       fat: parseFloat(this.state.fat),
-      age: new Date(this.state.age).toLocaleString(),
+      age: new Date(this.state.age),
     };
 
     if (this.state.id) {
@@ -99,7 +99,8 @@ export default class Cadatro extends React.Component {
       .then((value) => {
         alert(value.data);
         console.log(value);
-        window.location.href = "/";
+        window.location.reload();
+        window.location.href='/alunos'
       })
       .catch((err) => {
         console.log(err);

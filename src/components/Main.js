@@ -42,9 +42,8 @@ export default class Main extends React.Component {
                 <div className="buttons">
                   <IconButton
                     className="mobile"
-                    aria-label="more"
-                    aria-controls="long-menu"
-                    aria-haspopup="true"
+                    
+               
                     onClick={this.handleToggle}
                     
                   >
