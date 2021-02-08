@@ -109,7 +109,7 @@ export default class Cadatro extends React.Component {
 
   render() {
     return (
-      <div>
+      <div >
         {this.state.load ? <LinearProgress color="secondary" /> : ""}
         <h1>{this.state.id ? "Alteração de Aluno" : "Cadastro de Aluno"}</h1>
 
@@ -210,7 +210,7 @@ export default class Cadatro extends React.Component {
             </TextField>
             <Grid item xs={12}>
               <Button
-              variant="contained"
+             
                 color={this.state.id ? "secondary" : "primary"}
                 style={{ margin: "50px" }}
                 onClick={this.SubmitForm}
