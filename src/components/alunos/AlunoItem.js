@@ -17,7 +17,6 @@ export default function AlunoItem(props) {
     setRenovar(!openRenovar);
   }
 
-
   return (
     <React.Fragment>
       <Card className="cardAluno">
@@ -45,39 +44,63 @@ export default function AlunoItem(props) {
                   component="p"
                   className="typography"
                 >
-                  <Button size="small" variant="contained" color="secondary">
-                    <span style={{ fontSize: "9px" }}>
+                  <Button size="small" variant="contained" color="default">
+                    <span
+                      style={
+                        data.exp > new Date().getTime()
+                          ? { fontSize: "9px", color: "rgb(76, 175, 80)" }
+                          : { fontSize: "9px", color: "rgb(220, 0, 78)" }
+                      }
+                    >
                       {" "}
                       Peso {data.weight}kg
                     </span>
                   </Button>
 
-                  <Button size="small" variant="contained" color="secondary">
-                    <span style={{ fontSize: "9px" }}>
+                  <Button size="small" variant="contained" color="default">
+                    <span
+                      style={
+                        data.exp > new Date().getTime()
+                          ? { fontSize: "9px", color: "rgb(76, 175, 80)" }
+                          : { fontSize: "9px", color: "rgb(220, 0, 78)" }
+                      }
+                    >
                       {" "}
                       Gordura {data.fat}%
                     </span>
                   </Button>
 
-                  <Button size="small" variant="contained" color="secondary">
-                    <span style={{ fontSize: "9px" }}>
+                  <Button size="small" variant="contained" color="default">
+                    <span
+                      style={
+                        data.exp > new Date().getTime()
+                          ? { fontSize: "9px", color: "rgb(76, 175, 80)" }
+                          : { fontSize: "9px", color: "rgb(220, 0, 78)" }
+                      }
+                    >
                       {" "}
                       Pressão {data.pressure}
                     </span>
                   </Button>
 
-                  <Button size="small" variant="contained" color="secondary">
-                    <span style={{ fontSize: "9px" }}>
+                  <Button size="small" variant="contained" color="default">
+                    <span
+                      style={
+                        data.exp > new Date().getTime()
+                          ? { fontSize: "9px", color: "rgb(76, 175, 80)" }
+                          : { fontSize: "9px", color: "rgb(220, 0, 78)" }
+                      }
+                    >
                       {" "}
                       Altura {data.height}m
                     </span>
                   </Button>
-                 
-                    <span style={{ fontSize: "9px", marginTop:'10px' }}>
-                      {" "}
-                   Vencimento Da Mátricula {new Date(data.exp).toLocaleDateString() }
-                    </span>
-                  
+
+                  <span style={{ fontSize: "9px", marginTop: "10px" }}>
+                    {" "}
+                    Vencimento Da Mátricula{" "}
+                    {new Date(data.exp).toLocaleDateString()}
+                  </span>
                 </Typography>
               </Link>
             </CardContent>
@@ -87,14 +110,17 @@ export default function AlunoItem(props) {
           <Button
             variant="contained"
             size="small"
-        
-            style={data.exp > new Date().getTime()?{backgroundColor:"rgb(76, 175, 80)",color:"#ffff"}:{backgroundColor:"rgb(220, 0, 78)",color:"#ffff"}}
+            style={
+              data.exp > new Date().getTime()
+                ? { backgroundColor: "rgb(76, 175, 80)", color: "#ffff" }
+                : { backgroundColor: "rgb(220, 0, 78)", color: "#ffff" }
+            }
             onClick={openContainerRenovar}
             startIcon={
               openRenovar ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />
             }
           >
-           {openRenovar?'':'Renovar'}
+            {openRenovar ? "" : "Renovar"}
           </Button>
 
           <Link

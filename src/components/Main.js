@@ -2,12 +2,15 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Home from "./home/Home";
 import Alunos from "./alunos/Alunos";
 import Settings from "./settings/Settings";
 import Cadastro from "./alunos/cadastro/Cadastro";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 
 import "./Main.css";
 export default class Main extends React.Component {
@@ -28,7 +31,60 @@ export default class Main extends React.Component {
       <Router>
         <div className="main">
           <Grid container spacing={0}>
-            <Grid item xs={12} className="appbar">
+            <Grid item xs={12}>
+              <AppBar position="static" style={{backgroundColor:"rgb(76, 175, 80)"}} className="app">
+             
+              
+            
+              <Link to="/" style={{textDecoration:"none",color:"#fff"}} className="titleLogo">
+<h3>Academia Fisic</h3>
+</Link>
+
+                   
+             
+                  
+               
+                <Toolbar className="toolbar">{this.state.mobile?
+                <IconButton edge="start" color="inherit" aria-label="menu">
+                    <MenuIcon />
+                  </IconButton>:
+                
+                  <Typography variant="h6" color="inherit" className="buttons" >
+             
+                    <Link to="/">
+                      {" "}
+                      <Button   size="small" style={{border:"1px solid #fff",color:"#fff"}}>
+                        Inicio
+                      </Button>
+                    </Link>
+
+                    <Link to="/alunos">
+                      {" "}
+                      <Button  size="small" style={{border:"1px solid #fff",color:"#fff"}}>
+                        Alunos
+                      </Button>
+                    </Link>
+                    <Link to="/settings">
+                      {" "}
+                      <Button  size="small" style={{border:"1px solid #fff",color:"#fff"}}>
+                        Settings
+                      </Button>
+                    </Link>
+                    <Link to="/register/aluno">
+                      {" "}
+                      <Button  size="small" style={{border:"1px solid #fff",color:"#fff"}}>
+                        Cadastrar Aluno
+                      </Button>
+                    </Link>
+                  </Typography>
+        }
+
+                </Toolbar>
+              </AppBar>
+              {/* 
+
+
+              
               <div className="spaceBar">
                 <div className="logo">
                 <Link to="/">
@@ -77,6 +133,7 @@ export default class Main extends React.Component {
                   </Link>
                 </div>
               </div>
+                */}
             </Grid>
             <Grid item xs={12} className="container">
               {this.state.mobile ? (

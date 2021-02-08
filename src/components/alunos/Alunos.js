@@ -5,26 +5,29 @@ import "./Alunos.css";
 import Paper from "@material-ui/core/Paper";
 import AlunoItem from "./AlunoItem";
 import Cadastro from "./cadastro/Cadastro";
+import CircularProgress from '@material-ui/core/CircularProgress';
 export default class Alunos extends React.Component {
+  
   state = {
-    alunos: [],
+    alunos: '',
     expToday: new Date().getTime(),
   };
-
+  
   componentDidMount() {
     //var paperAluno= document.getElementsByClassName('gridAlunoItem')
-
+    
     var baseUrl = "http://localhost:4000/alunos";
     Axios.get(baseUrl)
-      .then((res) => {
-        this.setState({
-          alunos: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+    .then((res) => {
+      this.setState({
+        alunos: res.data,
       });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
+
   
   
   loadingAlunos(){
@@ -35,6 +38,7 @@ export default class Alunos extends React.Component {
         this.setState({
           alunos: res.data,
         });
+    
       })
       .catch((err) => {
         console.log(err);
@@ -48,8 +52,15 @@ export default class Alunos extends React.Component {
           <div className="alunosContent">
             <Switch>
               <Route path="/alunos" exact>
-                {this.state.alunos === undefined
-                  ? "Nenhuma aluno"
+                {this.state.alunos===''
+                  ? 
+                  <CircularProgress
+           
+        size={70}
+       style={{color:"rgb(76, 175, 80)"}}
+      
+       
+      />
                   : this.state.alunos.map((e) => {
                       return (
                         <Paper

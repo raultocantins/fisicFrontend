@@ -6,7 +6,7 @@ height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70px;
+    height: 60px;
     background-color: #000;
 }
 .appbar img{
@@ -21,33 +21,17 @@ height: 100vh;
     
    
 }
-.buttons{
-    width: 80%;
-    display: flex;   
-    height: 100%;
-justify-content: center;
-overflow: hidden;
 
-
-}
-.buttons button{
- width: 150px;
- height: 80%;
- font-size: 12px;
- margin: 10px ;
-    background-color: #000!important;
-    color:#fff  }
-
-.buttons button:hover{
-    background-color: #fff!important;
-    color:rgb(105, 87, 87);
-    transition: all 0.7s;
-   
-}
  
 .buttons a{
 outline: none;
 text-decoration: none;
+}
+
+.buttons button{
+    margin: 10px;
+    width: 150px;
+    font-size: 12px;
 }
 .container{
     display: flex;
@@ -72,6 +56,22 @@ text-decoration: none;
     
 }
 
+.toolbar{
+    display: flex;
+    justify-content: center;
+
+ width: 80%;
+}
+.app{
+   
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: row!important;
+}
+.app .titleLogo{
+    width: 20%;
+}
 
 @media (max-width: 600px){
     .menuMobile{
