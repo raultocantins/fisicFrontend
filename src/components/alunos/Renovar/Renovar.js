@@ -34,26 +34,30 @@ export default function RenovarMatricula(props) {
   return (
     <div className="renovarMatricula">
       <ButtonGroup
-        color="secondary"
+        color="primary"
         aria-label="outlined primary button group"
         size="small"
         variant="contained"
+        className="groupButtons"
       >
         <Button
           onClick={() => setValue("1")}
-          color={select === "1" ? "secondary" : "default"}
+
+          style={select === "1"?{backgroundColor:"#004d40"}:{backgroundColor:"#ffff",color:"#000"}}
         >
           Mês
         </Button>
         <Button
           onClick={() => setValue("2")}
-          color={select === "2" ? "secondary" : "default"}
+          style={select === "2"?{backgroundColor:"#004d40"}:{backgroundColor:"#ffff",color:"#000"}}
+        
         >
           Trimestre
         </Button>
         <Button
           onClick={() => setValue("3")}
-          color={select === "3" ? "secondary" : "default"}
+        
+          style={select === "3"?{backgroundColor:"#004d40"}:{backgroundColor:"#ffff",color:"#000"}}
         >
           Anual
         </Button>
@@ -71,8 +75,13 @@ export default function RenovarMatricula(props) {
           onClick={RenovarMatricula}
         >
           <CheckIcon style={{color:"green"}}  />
+          
+         
         </Button>
+        
+        
       )}
+      <p>Confirmar Renovação</p>
     </div>
   );
 }

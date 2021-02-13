@@ -1,9 +1,10 @@
 .cadastro{
-    padding: 20px;
+   
     display: flex;
    justify-content: center;
     flex-wrap: wrap;
 vertical-align: top;
+
 
 }
 .textfield{
@@ -12,5 +13,8 @@ vertical-align: top;
 }
 .containerCadastro{
     display: flex;
-    justify-content: center;
+    justify-content: center;    
+    width: 95%!important;
+    height: 95vh;
+    background-color: rgb(255, 255, 255);
 }

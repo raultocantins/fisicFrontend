@@ -3,7 +3,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import querystring from "querystring";
-import LinearProgress from "@material-ui/core/LinearProgress";
+
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Axios from "axios";
 import "./Cadastro.css";
 import TextField from "@material-ui/core/TextField";
@@ -109,12 +110,15 @@ export default class Cadatro extends React.Component {
 
   render() {
     return (
-      <div >
-        {this.state.load ? <LinearProgress color="secondary" /> : ""}
-        <h1>{this.state.id ? "Alteração de Aluno" : "Cadastro de Aluno"}</h1>
+      <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+        {this.state.load ? <CircularProgress style={{color:"green"}} /> : ""}
+     
+        <Grid container spacing={0} className="containerCadastro">
+             <h1>{this.state.id ? "Alteração de Aluno" : "Cadastro de Aluno"}</h1>
 
-        <Grid container spacing={3} className="containerCadastro">
           <Grid item xs={10} className="cadastro">
+
+            
             <TextField
               className="textfield"
               id="outlined-basic"
@@ -210,9 +214,9 @@ export default class Cadatro extends React.Component {
             </TextField>
             <Grid item xs={12}>
               <Button
-             
-                color={this.state.id ? "secondary" : "primary"}
-                style={{ margin: "50px" }}
+        
+               
+                style={{ margin: "50px" ,backgroundColor:"#004d40",color:"#fff"}}
                 onClick={this.SubmitForm}
               >
                 {this.state.id ? "Alterar" : "Cadastrar"}

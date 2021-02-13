@@ -11,7 +11,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import GroupIcon from "@material-ui/icons/Group";
+import SettingsIcon from "@material-ui/icons/Settings";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import "./Main.css";
 export default class Main extends React.Component {
   state = {
@@ -31,111 +34,63 @@ export default class Main extends React.Component {
       <Router>
         <div className="main">
           <Grid container spacing={0}>
-            <Grid item xs={12}>
-              <AppBar position="static" style={{backgroundColor:"rgb(76, 175, 80)"}} className="app">
-             
-              
-            
-              <Link to="/" style={{textDecoration:"none",color:"#fff"}} className="titleLogo">
-<h3>Academia Fisic</h3>
-</Link>
+            <Grid item xs={2}>
+              <AppBar position="static" className="app">
+                <Link
+                  to="/"
+                  style={{ textDecoration: "none", color: "#fff" }}
+                  className="titleLogo"
+                >
+                  <h3>Academia Fisic</h3>
+                </Link>
 
-                   
-             
-                  
-               
-                <Toolbar className="toolbar">{this.state.mobile?
-                <IconButton edge="start" color="inherit" aria-label="menu">
-                    <MenuIcon />
-                  </IconButton>:
-                
-                  <Typography variant="h6" color="inherit" className="buttons" >
-             
-                    <Link to="/">
-                      {" "}
-                      <Button   size="small" style={{border:"1px solid #fff",color:"#fff"}}>
-                        Inicio
-                      </Button>
-                    </Link>
+                <Toolbar className="toolbar" className="toolbarApp">
+                  {this.state.mobile ? (
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                      <MenuIcon />
+                    </IconButton>
+                  ) : (
+                    <Typography
+                      variant="h6"
+                      color="inherit"
+                      className="buttons"
+                    >
+                      <Link to="/">
+                        {" "}
+                        <Button>
+                          <DashboardIcon />
+                          {/*DashBoard */}
+                        </Button>
+                      </Link>
 
-                    <Link to="/alunos">
-                      {" "}
-                      <Button  size="small" style={{border:"1px solid #fff",color:"#fff"}}>
-                        Alunos
-                      </Button>
-                    </Link>
-                    <Link to="/settings">
-                      {" "}
-                      <Button  size="small" style={{border:"1px solid #fff",color:"#fff"}}>
-                        Settings
-                      </Button>
-                    </Link>
-                    <Link to="/register/aluno">
-                      {" "}
-                      <Button  size="small" style={{border:"1px solid #fff",color:"#fff"}}>
-                        Cadastrar Aluno
-                      </Button>
-                    </Link>
-                  </Typography>
-        }
-
+                      <Link to="/alunos">
+                        {" "}
+                        <Button>
+                          <GroupIcon />
+                          {/*Alunos */}
+                        </Button>
+                      </Link>
+                      <Link to="/settings">
+                        {" "}
+                        <Button>
+                          <SettingsIcon />
+                          {/*  Settings */}
+                        </Button>
+                      </Link>
+                      <Link to="/register/aluno">
+                        {" "}
+                        <Button>
+                          <PersonAddIcon />
+                          {/*  Cadastrar Aluno */}
+                        </Button>
+                      </Link>
+                    </Typography>
+                  )}
                 </Toolbar>
               </AppBar>
-              {/* 
-
-
-              
-              <div className="spaceBar">
-                <div className="logo">
-                <Link to="/">
-                  <img
-                    src="https://www.fisic.com.br/wp-content/uploads/2020/08/Logo-Fisic-Academia-RGB2.jpg"
-                    alt="logo"
-                  />
-                  </Link>
-                </div>
-
-                <div className="buttons">
-                  <IconButton
-                    className="mobile"
-                    
-               
-                    onClick={this.handleToggle}
-                    
-                  >
-                    <MoreVertIcon />
-                  </IconButton>
-
-                  <Link to="/">
-                    {" "}
-                    <Button variant="outlined" size="small">
-                      Inicio
-                    </Button>
-                  </Link>
-
-                  <Link to="/alunos">
-                    {" "}
-                    <Button variant="outlined" size="small">
-                      Alunos
-                    </Button>
-                  </Link>
-                  <Link to="/settings">
-                    {" "}
-                    <Button variant="outlined" size="small">
-                      Settings
-                    </Button>
-                  </Link>
-                  <Link to="/register/aluno">
-                    {" "}
-                    <Button variant="outlined" size="small">
-                      Cadastrar Aluno
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-                */}
+            
             </Grid>
-            <Grid item xs={12} className="container">
+            <Grid item xs={10} className="container">
               {this.state.mobile ? (
                 <div className="menuMobile">
                   <Link to="/" onClick={this.handleToggle}>

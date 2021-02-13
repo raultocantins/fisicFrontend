@@ -20,13 +20,13 @@ export default function AlunoItem(props) {
   return (
     <React.Fragment>
       <Card className="cardAluno">
-        <CardActionArea>
+        <CardActionArea style={{ height: "70%", width: "100%" }}>
           {openRenovar ? (
             <CardContent className="cardRenovar">
               <RenovarMatricula data={data} />
             </CardContent>
           ) : (
-            <CardContent>
+            <CardContent className="cardTopAluno">
               <Link
                 to={`/register/aluno/key=update&id=${data._id}`}
                 className="linkCardAluno"
@@ -44,76 +44,80 @@ export default function AlunoItem(props) {
                   component="p"
                   className="typography"
                 >
-                  <Button size="small" variant="contained" color="default">
-                    <span
-                      style={
-                        data.exp > new Date().getTime()
-                          ? { fontSize: "9px", color: "rgb(76, 175, 80)" }
-                          : { fontSize: "9px", color: "rgb(220, 0, 78)" }
-                      }
-                    >
-                      {" "}
-                      Peso {data.weight}kg
-                    </span>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    style={{ color: "#fff" }}
+                  >
+                    <span>  {data.weight}kg</span>
                   </Button>
 
-                  <Button size="small" variant="contained" color="default">
-                    <span
-                      style={
-                        data.exp > new Date().getTime()
-                          ? { fontSize: "9px", color: "rgb(76, 175, 80)" }
-                          : { fontSize: "9px", color: "rgb(220, 0, 78)" }
-                      }
-                    >
-                      {" "}
-                      Gordura {data.fat}%
-                    </span>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    style={{ color: "#fff" }}
+                  >
+                    <span>  {data.fat}%</span>
                   </Button>
 
-                  <Button size="small" variant="contained" color="default">
-                    <span
-                      style={
-                        data.exp > new Date().getTime()
-                          ? { fontSize: "9px", color: "rgb(76, 175, 80)" }
-                          : { fontSize: "9px", color: "rgb(220, 0, 78)" }
-                      }
-                    >
-                      {" "}
-                      Pressão {data.pressure}
-                    </span>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    style={{ color: "#fff" }}
+                  >
+                    <span>  {data.pressure}</span>
                   </Button>
 
-                  <Button size="small" variant="contained" color="default">
-                    <span
-                      style={
-                        data.exp > new Date().getTime()
-                          ? { fontSize: "9px", color: "rgb(76, 175, 80)" }
-                          : { fontSize: "9px", color: "rgb(220, 0, 78)" }
-                      }
-                    >
-                      {" "}
-                      Altura {data.height}m
-                    </span>
+                  <Button
+                    size="small"
+                    variant="contained"
+                   
+                    style={{ color: "#fff" }}
+                  >
+                    <span> {data.height}m</span>
                   </Button>
 
-                  <span style={{ fontSize: "9px", marginTop: "10px" }}>
+                  <span
+                    style={
+                      data.exp > new Date().getTime()
+                        ? { fontSize: "9px", color: "#212121 " }
+                        : { fontSize: "9px", color: "red" }
+                    }
+                  >
                     {" "}
                     Vencimento Da Mátricula{" "}
-                    {new Date(data.exp).toLocaleDateString()}
+                    <strong
+                      style={
+                        data.exp > new Date().getTime()
+                          ? {
+                              fontWeight: "800",
+
+                              padding: "5px",
+                            }
+                          : {
+                              fontWeight: "800",
+
+                              padding: "5px",
+                            }
+                      }
+                    >
+                      {" "}
+                      {new Date(data.exp).toLocaleDateString()}
+                    </strong>
                   </span>
                 </Typography>
               </Link>
             </CardContent>
           )}
         </CardActionArea>
-        <CardActions>
+        <CardActions style={{ height: "30%" }} className="cardBottomAluno">
           <Button
             variant="contained"
             size="small"
             style={
               data.exp > new Date().getTime()
-                ? { backgroundColor: "rgb(76, 175, 80)", color: "#ffff" }
-                : { backgroundColor: "rgb(220, 0, 78)", color: "#ffff" }
+                ? { color: "#000",backgroundColor:"#fff" }
+                : { color: "rgb(220, 0, 78)" ,backgroundColor:"#fff"}
             }
             onClick={openContainerRenovar}
             startIcon={
@@ -130,7 +134,7 @@ export default function AlunoItem(props) {
             {openRenovar ? (
               ""
             ) : (
-              <Button size="small" color="primary">
+              <Button size="small" style={{color: "#ffff"}}>
                 Alterar
               </Button>
             )}
