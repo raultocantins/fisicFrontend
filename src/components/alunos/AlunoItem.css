@@ -9,14 +9,14 @@
 .typography button{
 margin: 5px;
 width: 50px;
-color: #fff;
+color: rgb(255, 255, 255);
 height: 15px;
 font-size: 8px!important;
-background-color: #004d40;
+
 
 }
 .typographyName{
-color: rgb(0, 0, 0);
+color: rgb(5, 5, 5);
 height: 25px;
 font-size: 17px!important;
 overflow: hidden;
@@ -49,5 +49,5 @@ width: 200px;
   
 }
 .cardBottomAluno{
-background-color: #004d40;
+
 }

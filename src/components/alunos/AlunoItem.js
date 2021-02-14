@@ -47,42 +47,57 @@ export default function AlunoItem(props) {
                   <Button
                     size="small"
                     variant="contained"
-                    style={{ color: "#fff" }}
+                    style={
+                      data.exp > new Date().getTime()
+                        ? { backgroundColor: "rgb(76, 175, 80)" }
+                        : { backgroundColor: "#FF5252" }
+                    }
                   >
-                    <span>  {data.weight}kg</span>
+                    <span> {data.weight}kg</span>
                   </Button>
 
                   <Button
                     size="small"
                     variant="contained"
-                    style={{ color: "#fff" }}
+                    style={
+                      data.exp > new Date().getTime()
+                        ? { backgroundColor: "rgb(76, 175, 80)" }
+                        : { backgroundColor: "#FF5252" }
+                    }
                   >
-                    <span>  {data.fat}%</span>
+                    <span> {data.fat}%</span>
                   </Button>
 
                   <Button
                     size="small"
                     variant="contained"
-                    style={{ color: "#fff" }}
+                    style={
+                      data.exp > new Date().getTime()
+                        ? { backgroundColor: "rgb(76, 175, 80)" }
+                        : { backgroundColor: "#FF5252" }
+                    }
                   >
-                    <span>  {data.pressure}</span>
+                    <span> {data.pressure}</span>
                   </Button>
 
                   <Button
                     size="small"
                     variant="contained"
-                   
-                    style={{ color: "#fff" }}
+                    style={
+                      data.exp > new Date().getTime()
+                        ? { backgroundColor: "rgb(76, 175, 80)" }
+                        : { backgroundColor: "#FF5252" }
+                    }
                   >
                     <span> {data.height}m</span>
                   </Button>
 
                   <span
-                    style={
-                      data.exp > new Date().getTime()
-                        ? { fontSize: "9px", color: "#212121 " }
-                        : { fontSize: "9px", color: "red" }
-                    }
+                    style={{
+                      fontSize: "9px",
+                      color: "#212121 ",
+                      margin: "10px",
+                    }}
                   >
                     {" "}
                     Vencimento Da Mátricula{" "}
@@ -91,12 +106,12 @@ export default function AlunoItem(props) {
                         data.exp > new Date().getTime()
                           ? {
                               fontWeight: "800",
-
+                              color: "rgb(76, 175, 80)",
                               padding: "5px",
                             }
                           : {
                               fontWeight: "800",
-
+                              color: "#FF5252",
                               padding: "5px",
                             }
                       }
@@ -116,8 +131,8 @@ export default function AlunoItem(props) {
             size="small"
             style={
               data.exp > new Date().getTime()
-                ? { color: "#000",backgroundColor:"#fff" }
-                : { color: "rgb(220, 0, 78)" ,backgroundColor:"#fff"}
+                ? { color: "rgb(76, 175, 80)", backgroundColor: "#fff" }
+                : { color: "#FF5252", backgroundColor: "#fff" }
             }
             onClick={openContainerRenovar}
             startIcon={
@@ -134,7 +149,7 @@ export default function AlunoItem(props) {
             {openRenovar ? (
               ""
             ) : (
-              <Button size="small" style={{color: "#ffff"}}>
+              <Button size="small" style={{ fontSize: "10px" }}>
                 Alterar
               </Button>
             )}

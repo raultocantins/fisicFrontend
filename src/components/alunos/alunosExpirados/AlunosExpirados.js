@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Axios from "axios";
-import "./Alunos.css";
+import "./AlunosExpirados.css";
 import Paper from "@material-ui/core/Paper";
-import AlunoItem from "./AlunoItem";
-import Cadastro from "./cadastro/Cadastro";
+import AlunoItem from "../AlunoItem";
+import Cadastro from "../cadastro/Cadastro";
 import CircularProgress from "@material-ui/core/CircularProgress";
-export default class Alunos extends React.Component {
+export default class AlunosExpirados extends React.Component {
   state = {
     alunos: "",
     expToday: new Date().getTime(),
@@ -15,9 +15,10 @@ export default class Alunos extends React.Component {
   componentDidMount() {
     //var paperAluno= document.getElementsByClassName('gridAlunoItem')
 
-    var baseUrl = "http://localhost:4000/alunos";
+    var baseUrl = "http://localhost:4000/mensalidades/expiradas";
     Axios.get(baseUrl)
       .then((res) => {
+      
         this.setState({
           alunos: res.data,
         });
@@ -28,7 +29,7 @@ export default class Alunos extends React.Component {
   }
 
   loadingAlunos() {
-    var baseUrl = "http://localhost:4000/alunos";
+    var baseUrl = "http://localhost:4000/mensalidades/expiradas";
     Axios.get(baseUrl)
       .then((res) => {
         this.setState({
@@ -46,7 +47,7 @@ export default class Alunos extends React.Component {
         <div className="alunos">
           <div className="alunosContent">
             <Switch>
-              <Route path="/alunos" exact>
+              <Route path="/mensalidades/expiradas" exact>
                 {this.state.alunos === "" ? (
                   <CircularProgress
                     size={70}
@@ -55,6 +56,7 @@ export default class Alunos extends React.Component {
                 ) : (
                   this.state.alunos.map((e) => {
                     return (
+                        e?
                       <Paper
                         className={e.exp > new Date().getTime()?'gridAlunoItemTrue':'gridAlunoItemFalse'}
                         key={e._id}
@@ -65,7 +67,7 @@ export default class Alunos extends React.Component {
                           data={e}
                           loadingAlunos={this.loadingAlunos}
                         />
-                      </Paper>
+                      </Paper>:''
                     );
                   })
                 )}

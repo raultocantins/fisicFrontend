@@ -20,6 +20,17 @@ overflow-y: auto;
 
 
 }
-.gridAlunoItem{  
+.gridAlunoItemTrue{  
  margin: 50px 50px 0px 50px;
+ border-left: 15px solid rgb(76, 175, 80);
+ border-bottom: 5px solid rgb(76, 175, 80);
+ border-top: 5px solid rgb(76, 175, 80);
+ border-right: 1px solid rgb(76, 175, 80);
 }
+.gridAlunoItemFalse{  
+  margin: 50px 50px 0px 50px;
+  border-left: 15px solid #FF5252;
+  border-bottom: 5px solid #FF5252;
+  border-top: 5px solid #FF5252;
+  border-right: 1px solid #FF5252;
+ }

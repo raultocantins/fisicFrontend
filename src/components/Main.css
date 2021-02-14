@@ -1,7 +1,7 @@
 .main{
 width: 100vw;
 height: 100vh;
-background-color: rgb(231, 232, 234)!important;
+background-color: #C8E6C9;
 }
 
 .appbar img{
@@ -23,24 +23,37 @@ outline: none;
 text-decoration: none;
 }
 
+
 .buttons button{
     margin: 10px 0px;
     height: 50px;
     width: 100%;
     font-size: 12px;
     border: none!important;
-    color: #fff;
-  align-items: stretch;
-  justify-content: center;
+    color: #fff;  
+  align-items:center;
+  justify-content:center;
+ 
 
 }
+.textButtonToggle{
+    margin-left: 5px;
+animation-name: toggleTextButton;
+animation-duration: 1s;
 
+
+}
+.buttons button:hover{
+    animation-name: toggleTextButton;
+animation-duration: 1s;
+}
 
 
 .container{
     display: flex;
     justify-content: center;
   overflow: hidden;
+  margin: 0px!important;
 }
 
 .buttons .mobile{
@@ -48,37 +61,45 @@ text-decoration: none;
 }
 
 
-.container{
-    margin: 0px!important;
-    
-}
 
 .toolbar{
     display: flex;
     justify-content: center;
 height: auto;
- width: 80%;
+ width: 100%;
+ padding: 0px!important;
+ margin: 0px!important;
 }
 .app{
-    background-color: rgb(29, 38, 45)!important;
-  
+    background-color: #4CAF50!important;
+  display: flex;
    overflow-y: auto;
+
  
    
     height: 100vh;
 }
-.toolbarApp{
-    padding: 0px!important;
-margin: 0px!important;
-}
 
 .titleLogo{
-    background-color: rgb(32, 45, 51)!important;
+    background-color: #4CAF50!important;
     height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+    height: 5px;
+    
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #4caf4f38;
+    border-radius: 30px;
+    
+  }
+
 
 @media (max-width: 600px){
     .menuMobile{
@@ -148,5 +169,14 @@ opacity: 0;
     }to{
         opacity: 1;
 height: 300px;
+    }
+}
+
+
+@keyframes toggleTextButton{
+    from{
+        opacity: 0;
+    }to{
+        opacity: 1;
     }
 }

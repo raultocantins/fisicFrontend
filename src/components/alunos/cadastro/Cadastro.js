@@ -216,7 +216,7 @@ export default class Cadatro extends React.Component {
               <Button
         
                
-                style={{ margin: "50px" ,backgroundColor:"#004d40",color:"#fff"}}
+                style={{ margin: "50px" ,backgroundColor:"#4CAF50",color:"#fff"}}
                 onClick={this.SubmitForm}
               >
                 {this.state.id ? "Alterar" : "Cadastrar"}

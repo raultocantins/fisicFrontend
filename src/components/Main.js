@@ -1,9 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Home from "./home/Home";
 import Alunos from "./alunos/Alunos";
+import AlunosExpirados from './alunos/alunosExpirados/AlunosExpirados'
 import Settings from "./settings/Settings";
 import Cadastro from "./alunos/cadastro/Cadastro";
 import AppBar from "@material-ui/core/AppBar";
@@ -15,20 +17,51 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import Fab from '@material-ui/core/Fab';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import "./Main.css";
 export default class Main extends React.Component {
   state = {
     mobile: false,
+    dashboard: false,
+    aluno: false,
+    settings: false,
+    cadastrar: false,
+    qttExpirados:0
   };
   constructor(props) {
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
   }
+
+componentDidMount(){
+  var baseUrl = "http://localhost:4000/quantidade/expiradas";
+  Axios.get(baseUrl)
+  .then((res) => {
+     
+ 
+  
+      this.setState({
+        qttExpirados: res.data.value,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
   handleToggle() {
     this.setState({
       mobile: !this.state.mobile,
     });
   }
+  toggleTextButton(name) {
+    
+    this.setState({
+      [name]: !this.state[name]
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -36,15 +69,26 @@ export default class Main extends React.Component {
           <Grid container spacing={0}>
             <Grid item xs={2}>
               <AppBar position="static" className="app">
-                <Link
+         <div>
+            <Link
                   to="/"
                   style={{ textDecoration: "none", color: "#fff" }}
                   className="titleLogo"
                 >
                   <h3>Academia Fisic</h3>
                 </Link>
+                <Link to="/mensalidades/expiradas" >
+                <Fab>
+  <NotificationsActiveIcon />
+  {this.state.qttExpirados}
+</Fab>
+                </Link>
+              
+    
+                
+         </div>
 
-                <Toolbar className="toolbar" className="toolbarApp">
+                <Toolbar className="toolbar">
                   {this.state.mobile ? (
                     <IconButton edge="start" color="inherit" aria-label="menu">
                       <MenuIcon />
@@ -57,38 +101,81 @@ export default class Main extends React.Component {
                     >
                       <Link to="/">
                         {" "}
-                        <Button>
+                        <Button
+                          onMouseEnter={() =>
+                            this.toggleTextButton("dashboard")
+                          }
+                          onMouseLeave={() =>
+                            this.toggleTextButton("dashboard")
+                          }
+                        >
                           <DashboardIcon />
-                          {/*DashBoard */}
+                          {this.state.dashboard ? (
+                            <strong className="textButtonToggle">
+                              {" "}
+                              Dashboard
+                            </strong>
+                          ) : (
+                            ""
+                          )}
                         </Button>
                       </Link>
 
                       <Link to="/alunos">
                         {" "}
-                        <Button>
+                        <Button
+                          onMouseEnter={() => this.toggleTextButton("alunos")}
+                          onMouseLeave={() => this.toggleTextButton("alunos")}
+                        >
                           <GroupIcon />
-                          {/*Alunos */}
+                          {this.state.alunos ? (
+                            <strong className="textButtonToggle">
+                              {" "}
+                             Alunos
+                            </strong>
+                          ) : (
+                            ""
+                          )}
                         </Button>
                       </Link>
                       <Link to="/settings">
                         {" "}
-                        <Button>
+                        <Button
+                          onMouseEnter={() => this.toggleTextButton("settings")}
+                          onMouseLeave={() => this.toggleTextButton("settings")}
+                        >
                           <SettingsIcon />
-                          {/*  Settings */}
+                          {this.state.settings ? (
+                            <strong className="textButtonToggle">
+                              {" "}
+                             Settings
+                            </strong>
+                          ) : (
+                            ""
+                          )}
                         </Button>
                       </Link>
                       <Link to="/register/aluno">
                         {" "}
-                        <Button>
+                        <Button
+                          onMouseEnter={() => this.toggleTextButton("cadastro")}
+                          onMouseLeave={() => this.toggleTextButton("cadastro")}
+                        >
                           <PersonAddIcon />
-                          {/*  Cadastrar Aluno */}
+                          {this.state.cadastro ? (
+                            <strong className="textButtonToggle">
+                              {" "}
+                             Cadastrar
+                            </strong>
+                          ) : (
+                            ""
+                          )}
                         </Button>
                       </Link>
                     </Typography>
                   )}
                 </Toolbar>
               </AppBar>
-            
             </Grid>
             <Grid item xs={10} className="container">
               {this.state.mobile ? (
@@ -129,6 +216,9 @@ export default class Main extends React.Component {
                 <Route path="/alunos">
                   <Alunos />
                 </Route>
+                <Route path="/mensalidades/expiradas">
+                  < AlunosExpirados />
+                </Route>                
                 <Route path="/settings">
                   <Settings />
                 </Route>

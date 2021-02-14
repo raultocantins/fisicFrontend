@@ -3,7 +3,7 @@ import Axios from "axios";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import CheckIcon from '@material-ui/icons/Check';
+import CheckIcon from "@material-ui/icons/Check";
 import "./Renovar.css";
 export default function RenovarMatricula(props) {
   const [select, setSelect] = useState("1");
@@ -18,9 +18,9 @@ export default function RenovarMatricula(props) {
     var option = select;
     Axios.patch(`${baseUrl}/${data._id}/renovar`, { option })
       .then((res) => {
-          setLoading(false);
+        setLoading(false);
         setSuccess(true);
-        window.location.reload()
+        window.location.reload();
         console.log(res);
       })
       .catch((err) => {
@@ -34,7 +34,6 @@ export default function RenovarMatricula(props) {
   return (
     <div className="renovarMatricula">
       <ButtonGroup
-        color="primary"
         aria-label="outlined primary button group"
         size="small"
         variant="contained"
@@ -42,46 +41,52 @@ export default function RenovarMatricula(props) {
       >
         <Button
           onClick={() => setValue("1")}
-
-          style={select === "1"?{backgroundColor:"#004d40"}:{backgroundColor:"#ffff",color:"#000"}}
+          style={
+            select === "1"
+              ? { backgroundColor: "#FF5252", color: "#fff" }
+              : { backgroundColor: "#ffff", color: "#9E9E9E" }
+          }
         >
           Mês
         </Button>
         <Button
           onClick={() => setValue("2")}
-          style={select === "2"?{backgroundColor:"#004d40"}:{backgroundColor:"#ffff",color:"#000"}}
-        
+          style={
+            select === "2"
+              ? { backgroundColor: "#FF5252", color: "#fff" }
+              : { backgroundColor: "#ffff", color: "#9E9E9E" }
+          }
         >
           Trimestre
         </Button>
         <Button
           onClick={() => setValue("3")}
-        
-          style={select === "3"?{backgroundColor:"#004d40"}:{backgroundColor:"#ffff",color:"#000"}}
+          style={
+            select === "3"
+              ? { backgroundColor: "#FF5252", color: "#fff" }
+              : { backgroundColor: "#ffff", color: "#9E9E9E" }
+          }
         >
           Anual
         </Button>
       </ButtonGroup>
-      {loading ? <CircularProgress /> : ""}
+      {loading ? (
+        <CircularProgress style={{ color: "rgb(76, 175, 80)" }} />
+      ) : (
+        ""
+      )}
 
       {success ? (
-        <h1>Matricula Renovada</h1>
+        <h3>Matricula Renovada</h3>
       ) : (
+        <div onClick={RenovarMatricula}>
+          <Button size="small" onClick={RenovarMatricula}>
+            <CheckIcon style={{ color: "green" }} />
+          </Button>
 
-
-        <Button
-          size="small"
-         
-          onClick={RenovarMatricula}
-        >
-          <CheckIcon style={{color:"green"}}  />
-          
-         
-        </Button>
-        
-        
+          <p>Confirmar Renovação</p>
+        </div>
       )}
-      <p>Confirmar Renovação</p>
     </div>
   );
 }
