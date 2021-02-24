@@ -1,7 +1,7 @@
 .main{
 width: 100vw;
 height: 100vh;
-background-color: #C8E6C9;
+
 }
 
 .appbar img{
@@ -13,6 +13,7 @@ background-color: #C8E6C9;
 .logo{
     height: 100%;
     width: 20%;
+    
     
    
 }
@@ -90,16 +91,24 @@ height: auto;
 
 ::-webkit-scrollbar {
     background-color: transparent;
-    width: 5px;
-    height: 5px;
+    width: 0px;
+    height: 0px;
     
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #4caf4f38;
-    border-radius: 30px;
+    background-color: transparent;
+    border-radius: 0px;
     
   }
-
+  .fab{
+    background-color: #fff!important;
+  }
+  .fab strong{
+      font-size: 15px;
+      font-weight: 900;
+    
+     
+  }
 
 @media (max-width: 600px){
     .menuMobile{

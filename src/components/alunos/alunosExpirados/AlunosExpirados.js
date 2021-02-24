@@ -18,7 +18,7 @@ export default class AlunosExpirados extends React.Component {
     var baseUrl = "http://localhost:4000/mensalidades/expiradas";
     Axios.get(baseUrl)
       .then((res) => {
-      
+      console.log(res)
         this.setState({
           alunos: res.data,
         });
@@ -45,9 +45,12 @@ export default class AlunosExpirados extends React.Component {
     return (
       <Router>
         <div className="alunos">
+          
           <div className="alunosContent">
             <Switch>
               <Route path="/mensalidades/expiradas" exact>
+          <h1 style={{width:'100%'}}>Mensalidades Expiradas</h1>
+              
                 {this.state.alunos === "" ? (
                   <CircularProgress
                     size={70}
@@ -55,8 +58,11 @@ export default class AlunosExpirados extends React.Component {
                   />
                 ) : (
                   this.state.alunos.map((e) => {
+
                     return (
                         e?
+                      
+                      
                       <Paper
                         className={e.exp > new Date().getTime()?'gridAlunoItemTrue':'gridAlunoItemFalse'}
                         key={e._id}
@@ -68,6 +74,7 @@ export default class AlunosExpirados extends React.Component {
                           loadingAlunos={this.loadingAlunos}
                         />
                       </Paper>:''
+                      
                     );
                   })
                 )}

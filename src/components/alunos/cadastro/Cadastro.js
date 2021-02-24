@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import querystring from "querystring";
-
+import Alert from '@material-ui/lab/Alert';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Axios from "axios";
 import "./Cadastro.css";
@@ -25,11 +25,14 @@ export default class Cadatro extends React.Component {
     height: "",
     pressure: "",
     load: false,
+    alert:'',
+    alertError:""
   };
   constructor(props) {
     super(props);
 
     this.SubmitForm = this.SubmitForm.bind(this);
+    this.DeleteUser=this.DeleteUser.bind(this)
   }
   componentDidMount() {
     var id = querystring.parse(window.location.href);
@@ -60,10 +63,11 @@ export default class Cadatro extends React.Component {
             height: res.data.height,
             pressure: res.data.pressure,
             load: false,
+            
           });
         })
         .catch((err) => {
-          console.log(err);
+          
           this.setState({ load: false });
         });
     }
@@ -98,27 +102,65 @@ export default class Cadatro extends React.Component {
     }
     Axios.post(baseUrl, aluno)
       .then((value) => {
-        alert(value.data);
-        console.log(value);
-        window.location.reload();
-        window.location.href='/alunos'
+        this.setState({
+          alert:"Success"
+        })
+        setInterval(()=>{
+        
+          window.location.reload();
+          window.location.href = "/alunos";
+        },1000)
+       
       })
       .catch((err) => {
+       
+        this.setState({
+          alertError:`Error ${err.data}`
+        })
+      });
+  }
+  DeleteUser() {
+   Axios.delete(`http://localhost:4000/aluno/${this.state.id}/remove`)
+      .then((value) => {
+      
+        this.setState({
+          alert:"Usuário deletado com Sucesso! "
+        })
+        setInterval(()=>{
+          
+          window.location.reload();
+          window.location.href = "/alunos";
+        },1000)
+      })
+      .catch((err) => {
+        this.setState({
+          alertError:`Error ${err.data}`
+        })
         console.log(err);
       });
   }
 
   render() {
     return (
-      <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-        {this.state.load ? <CircularProgress style={{color:"green"}} /> : ""}
-     
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexWrap:"wrap"
+        }}
+      >
+          {this.state.alert? <Alert severity="success" style={{width:'100%'}}>{this.state.alert}</Alert>:''}
+        {this.state.alertError? <Alert severity="error" style={{width:'100%'}}>{this.state.alertError}</Alert>:''}
+      
+        
+        {this.state.load ? <CircularProgress style={{ color: "green" }} /> : ""}
+
         <Grid container spacing={0} className="containerCadastro">
-             <h1>{this.state.id ? "Alteração de Aluno" : "Cadastro de Aluno"}</h1>
+      
+          <h1>{this.state.id ? "Alteração de Aluno" : "Cadastro de Aluno"}</h1>
 
           <Grid item xs={10} className="cadastro">
-
-            
             <TextField
               className="textfield"
               id="outlined-basic"
@@ -214,13 +256,20 @@ export default class Cadatro extends React.Component {
             </TextField>
             <Grid item xs={12}>
               <Button
-        
+                style={{
+                  margin: "50px",
+                       color:"#4CAF50",
+                       borderColor:"#4CAF50"
+                }}
                
-                style={{ margin: "50px" ,backgroundColor:"#4CAF50",color:"#fff"}}
+                variant="outlined"
                 onClick={this.SubmitForm}
               >
                 {this.state.id ? "Alterar" : "Cadastrar"}
-              </Button>
+              </Button>{this.state.id?<Button variant="outlined" color="secondary" onClick={this.DeleteUser}>
+                Deletar
+              </Button>:''}
+              
             </Grid>
           </Grid>
         </Grid>

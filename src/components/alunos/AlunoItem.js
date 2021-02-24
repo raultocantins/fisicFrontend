@@ -36,7 +36,7 @@ export default function AlunoItem(props) {
                   variant="h6"
                   className="typographyName"
                 >
-                  {data.name}{" "}
+                  {data.name.toUpperCase()}{" "}
                 </Typography>
                 <Typography
                   variant="body2"

@@ -44,9 +44,12 @@ export default class Alunos extends React.Component {
     return (
       <Router>
         <div className="alunos">
+
           <div className="alunosContent">
+
             <Switch>
               <Route path="/alunos" exact>
+             
                 {this.state.alunos === "" ? (
                   <CircularProgress
                     size={70}

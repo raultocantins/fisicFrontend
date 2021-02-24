@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Home from "./home/Home";
 import Alunos from "./alunos/Alunos";
-import AlunosExpirados from './alunos/alunosExpirados/AlunosExpirados'
+import AlunosExpirados from "./alunos/alunosExpirados/AlunosExpirados";
 import Settings from "./settings/Settings";
 import Cadastro from "./alunos/cadastro/Cadastro";
 import AppBar from "@material-ui/core/AppBar";
@@ -17,8 +17,9 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import Fab from '@material-ui/core/Fab';
-import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import Fab from "@material-ui/core/Fab";
+import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import "./Main.css";
 export default class Main extends React.Component {
   state = {
@@ -27,28 +28,27 @@ export default class Main extends React.Component {
     aluno: false,
     settings: false,
     cadastrar: false,
-    qttExpirados:0
+    exit: false,
+    qttExpirados: 5,
   };
   constructor(props) {
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
   }
 
-componentDidMount(){
-  var baseUrl = "http://localhost:4000/quantidade/expiradas";
-  Axios.get(baseUrl)
-  .then((res) => {
-     
- 
-  
-      this.setState({
-        qttExpirados: res.data.value,
+  componentDidMount() {
+    var baseUrl = "http://localhost:4000/quantidade/expiradas";
+    Axios.get(baseUrl)
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          qttExpirados: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
+  }
 
   handleToggle() {
     this.setState({
@@ -56,9 +56,8 @@ componentDidMount(){
     });
   }
   toggleTextButton(name) {
-    
     this.setState({
-      [name]: !this.state[name]
+      [name]: !this.state[name],
     });
   }
 
@@ -69,24 +68,41 @@ componentDidMount(){
           <Grid container spacing={0}>
             <Grid item xs={2}>
               <AppBar position="static" className="app">
-         <div>
-            <Link
-                  to="/"
-                  style={{ textDecoration: "none", color: "#fff" }}
-                  className="titleLogo"
-                >
-                  <h3>Academia Fisic</h3>
-                </Link>
-                <Link to="/mensalidades/expiradas" >
-                <Fab>
-  <NotificationsActiveIcon />
-  {this.state.qttExpirados}
-</Fab>
-                </Link>
-              
-    
-                
-         </div>
+                <div>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "#fff" }}
+                    className="titleLogo"
+                  >
+                    <h3>FISIC GYM</h3>
+                  </Link>
+                 {this.qttExpirados>0? <Link
+                    to="/mensalidades/expiradas"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Fab className="fab">
+                      <NotificationsActiveIcon
+                        style={
+                          this.state.qttExpirados <= 0
+                            ? { color: "#fff" }
+                            : { color: "#ffb74d" }
+                        }
+                      />
+                      <strong
+                        style={
+                          this.state.qttExpirados <= 0
+                            ? { color: "#fff" }
+                            : { color: "#ffb74d" }
+                        }
+                      >
+                        {" "}
+                        {this.state.qttExpirados > 0
+                          ? this.state.qttExpirados
+                          : ""}
+                      </strong>
+                    </Fab>
+                  </Link>:''}
+                </div>
 
                 <Toolbar className="toolbar">
                   {this.state.mobile ? (
@@ -131,7 +147,7 @@ componentDidMount(){
                           {this.state.alunos ? (
                             <strong className="textButtonToggle">
                               {" "}
-                             Alunos
+                              Alunos
                             </strong>
                           ) : (
                             ""
@@ -148,7 +164,7 @@ componentDidMount(){
                           {this.state.settings ? (
                             <strong className="textButtonToggle">
                               {" "}
-                             Settings
+                              Settings
                             </strong>
                           ) : (
                             ""
@@ -165,13 +181,25 @@ componentDidMount(){
                           {this.state.cadastro ? (
                             <strong className="textButtonToggle">
                               {" "}
-                             Cadastrar
+                              Cadastrar
                             </strong>
                           ) : (
                             ""
                           )}
                         </Button>
                       </Link>
+                      <Button
+                        onMouseEnter={() => this.toggleTextButton("exit")}
+                        onMouseLeave={() => this.toggleTextButton("exit")}
+                      >
+                        <ExitToAppIcon />
+
+                        {this.state.exit ? (
+                          <strong className="textButtonToggle"> Exit</strong>
+                        ) : (
+                          ""
+                        )}
+                      </Button>
                     </Typography>
                   )}
                 </Toolbar>
@@ -217,8 +245,8 @@ componentDidMount(){
                   <Alunos />
                 </Route>
                 <Route path="/mensalidades/expiradas">
-                  < AlunosExpirados />
-                </Route>                
+                  <AlunosExpirados />
+                </Route>
                 <Route path="/settings">
                   <Settings />
                 </Route>
