@@ -1,6 +1,6 @@
 .home{
     display: flex;
-    justify-content: center;
+    justify-content: right;
     flex-wrap: wrap;
     overflow-y: auto;
     height: 100vh;   
@@ -8,8 +8,11 @@
 }
 .graphicBox{
     height: 300px;
-    width: 90%;
-    margin-top: 50px;
-
-    
+    width: 100%;
+    margin: 20px 50px 10px 50px;    
+}
+.listAlunoExp{
+    width: 60%;
+    height: 400px;
+    margin: 50px;
 }

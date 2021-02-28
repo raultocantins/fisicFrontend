@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Axios from "axios";
 import "./Alunos.css";
 import Paper from "@material-ui/core/Paper";
-import AlunoItem from "./AlunoItem";
+import AlunoItem from "./alunoItem/AlunoItem";
 import Cadastro from "./cadastro/Cadastro";
 import CircularProgress from "@material-ui/core/CircularProgress";
 export default class Alunos extends React.Component {

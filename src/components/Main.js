@@ -1,11 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Home from "./home/Home";
 import Alunos from "./alunos/Alunos";
-import AlunosExpirados from "./alunos/alunosExpirados/AlunosExpirados";
+
 import Settings from "./settings/Settings";
 import Cadastro from "./alunos/cadastro/Cadastro";
 import AppBar from "@material-ui/core/AppBar";
@@ -17,8 +16,6 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import Fab from "@material-ui/core/Fab";
-import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import "./Main.css";
 export default class Main extends React.Component {
@@ -29,26 +26,13 @@ export default class Main extends React.Component {
     settings: false,
     cadastrar: false,
     exit: false,
-    qttExpirados: 5,
+   
   };
   constructor(props) {
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
   }
 
-  componentDidMount() {
-    var baseUrl = "http://localhost:4000/quantidade/expiradas";
-    Axios.get(baseUrl)
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          qttExpirados: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
   handleToggle() {
     this.setState({
@@ -76,32 +60,7 @@ export default class Main extends React.Component {
                   >
                     <h3>FISIC GYM</h3>
                   </Link>
-                 {this.qttExpirados>0? <Link
-                    to="/mensalidades/expiradas"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Fab className="fab">
-                      <NotificationsActiveIcon
-                        style={
-                          this.state.qttExpirados <= 0
-                            ? { color: "#fff" }
-                            : { color: "#ffb74d" }
-                        }
-                      />
-                      <strong
-                        style={
-                          this.state.qttExpirados <= 0
-                            ? { color: "#fff" }
-                            : { color: "#ffb74d" }
-                        }
-                      >
-                        {" "}
-                        {this.state.qttExpirados > 0
-                          ? this.state.qttExpirados
-                          : ""}
-                      </strong>
-                    </Fab>
-                  </Link>:''}
+               
                 </div>
 
                 <Toolbar className="toolbar">
@@ -243,10 +202,7 @@ export default class Main extends React.Component {
                 </Route>
                 <Route path="/alunos">
                   <Alunos />
-                </Route>
-                <Route path="/mensalidades/expiradas">
-                  <AlunosExpirados />
-                </Route>
+                </Route>               
                 <Route path="/settings">
                   <Settings />
                 </Route>
