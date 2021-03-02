@@ -27,9 +27,10 @@ export default function DenseTable() {
   const classes = useStyles();
 
   useEffect(() => {
-    Axios.get("http://localhost:4000/quantidade/expiradas")
+    Axios.get("http://localhost:4000/mensalidades/expiradas")
       .then((res) => {
-        setExp(res.data);
+       setExp(res.data);
+        
       })
       .catch((err) => {
         alert(err);
@@ -83,8 +84,8 @@ export default function DenseTable() {
                     {new Date(exp.exp).toLocaleDateString()}
                   </TableCell>
                   <TableCell>
-                    <Button onClick={Cobrar}>
-                      <SendIcon color="secondary" />
+                    <Button onClick={Cobrar} disabled={exp.stepcobranca!==2} >
+                      <SendIcon color={exp.stepcobranca!==2?"default":'secondary'}  />
                     </Button>
                   </TableCell>
                 </TableRow>

@@ -5,11 +5,17 @@ import "./Alunos.css";
 import Paper from "@material-ui/core/Paper";
 import AlunoItem from "./alunoItem/AlunoItem";
 import Cadastro from "./cadastro/Cadastro";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import NotFound from "../../assets/not-found.svg";
+import InputBase from "@material-ui/core/InputBase";
+import InputAdornment from '@material-ui/core/InputAdornment';
+import SearchIcon from '@material-ui/icons/Search';
 export default class Alunos extends React.Component {
   state = {
     alunos: "",
     expToday: new Date().getTime(),
+    loading: true,
+    search: "",
   };
 
   componentDidMount() {
@@ -20,6 +26,7 @@ export default class Alunos extends React.Component {
       .then((res) => {
         this.setState({
           alunos: res.data,
+          loading: false,
         });
       })
       .catch((err) => {
@@ -39,38 +46,91 @@ export default class Alunos extends React.Component {
         console.log(err);
       });
   }
+  onchange(e) {
+    this.setState({
+      search: e.target.value,
+    });
+  }
+
+  renderAlunos = (aluno) => {
+    const { search } = this.state;
+    if (search !== "" && aluno.name.indexOf(search) === -1) {
+      return null;
+    }
+    return (
+      <Paper
+        className={
+          aluno.exp > new Date().getTime()
+            ? "gridAlunoItemTrue"
+            : "gridAlunoItemFalse"
+        }
+        key={aluno._id}
+        elevation={2}
+      >
+        <AlunoItem data={aluno} loadingAlunos={this.loadingAlunos} />
+      </Paper>
+    );
+  };
 
   render() {
     return (
       <Router>
-        <div className="alunos">
+        <div
+          className="alunos"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          {this.state.loading ? (
+            <LinearProgress
+              color="secondary"
+              style={{
+                width: "100vw",
+                top: "0px",
+                position: "absolute",
+                right: "0px",
+              }}
+            />
+          ) : (
+            ""
+          )}
+          <div className="barSearch">
+            
+          <InputBase
+            placeholder="Search Aluno…"
+          className="inputBase"
+            inputProps={{ "aria-label": "search" }}
+            onChange={(e) => this.onchange(e)}
+            startAdornment={
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            }
+          />
+          </div>
+         
 
           <div className="alunosContent">
-
             <Switch>
               <Route path="/alunos" exact>
-             
                 {this.state.alunos === "" ? (
-                  <CircularProgress
-                    size={70}
-                    style={{ color: "rgb(76, 175, 80)" }}
-                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      height: "100%",
+                    }}
+                  >
+                    <img
+                      src={NotFound}
+                      alt="not Found"
+                      style={{ width: "50%", height: "50%" }}
+                    />
+
+                    <h1>Nenhum aluno cadastrado !!!</h1>
+                  </div>
                 ) : (
-                  this.state.alunos.map((e) => {
-                    return (
-                      <Paper
-                        className={e.exp > new Date().getTime()?'gridAlunoItemTrue':'gridAlunoItemFalse'}
-                        key={e._id}
-                        elevation={2}
-                       
-                      >
-                        <AlunoItem
-                          data={e}
-                          loadingAlunos={this.loadingAlunos}
-                        />
-                      </Paper>
-                    );
-                  })
+                  this.state.alunos.map((e) => this.renderAlunos(e))
                 )}
               </Route>
 

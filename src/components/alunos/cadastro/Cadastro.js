@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import querystring from "querystring";
-import Alert from '@material-ui/lab/Alert';
+import Alert from "@material-ui/lab/Alert";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Axios from "axios";
 import "./Cadastro.css";
@@ -25,14 +25,14 @@ export default class Cadatro extends React.Component {
     height: "",
     pressure: "",
     load: false,
-    alert:'',
-    alertError:""
+    alert: "",
+    alertError: "",
   };
   constructor(props) {
     super(props);
 
     this.SubmitForm = this.SubmitForm.bind(this);
-    this.DeleteUser=this.DeleteUser.bind(this)
+    this.DeleteUser = this.DeleteUser.bind(this);
   }
   componentDidMount() {
     var id = querystring.parse(window.location.href);
@@ -63,11 +63,9 @@ export default class Cadatro extends React.Component {
             height: res.data.height,
             pressure: res.data.pressure,
             load: false,
-            
           });
         })
         .catch((err) => {
-          
           this.setState({ load: false });
         });
     }
@@ -100,42 +98,49 @@ export default class Cadatro extends React.Component {
     } else {
       aluno.dateregister = new Date();
     }
-    Axios.post(baseUrl, aluno)
-      .then((value) => {
-        this.setState({
-          alert:"Success"
+    if (
+      aluno.name &&
+      aluno.number &&
+      aluno.age &&
+      aluno.weight &&
+      aluno.height &&
+      aluno.fat
+    ) {
+      Axios.post(baseUrl, aluno)
+        .then((value) => {
+          this.setState({
+            alert: "Sucesso, você será redirecionado para todos os alunos.",
+          });
+          setInterval(() => {
+            window.location.reload();
+            window.location.href = "/alunos";
+          }, 1000);
         })
-        setInterval(()=>{
-        
-          window.location.reload();
-          window.location.href = "/alunos";
-        },1000)
-       
-      })
-      .catch((err) => {
-       
-        this.setState({
-          alertError:`Error ${err.data}`
-        })
-      });
+        .catch((err) => {
+          this.setState({
+            alertError: `Error ${err.data}`,
+          });
+        });
+    }else{
+      this.setState({alertError:"As informações não foram inseridas"})
+    }
+    
   }
   DeleteUser() {
-   Axios.delete(`http://localhost:4000/aluno/${this.state.id}/remove`)
+    Axios.delete(`http://localhost:4000/aluno/${this.state.id}/remove`)
       .then((value) => {
-      
         this.setState({
-          alert:"Usuário deletado com Sucesso! "
-        })
-        setInterval(()=>{
-          
+          alert: "Usuário deletado com Sucesso! ",
+        });
+        setInterval(() => {
           window.location.reload();
           window.location.href = "/alunos";
-        },1000)
+        }, 1000);
       })
       .catch((err) => {
         this.setState({
-          alertError:`Error ${err.data}`
-        })
+          alertError: `Error ${err.data}`,
+        });
         console.log(err);
       });
   }
@@ -147,17 +152,27 @@ export default class Cadatro extends React.Component {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          flexWrap:"wrap"
+          flexWrap: "wrap",
         }}
       >
-          {this.state.alert? <Alert severity="success" style={{width:'100%'}}>{this.state.alert}</Alert>:''}
-        {this.state.alertError? <Alert severity="error" style={{width:'100%'}}>{this.state.alertError}</Alert>:''}
-      
-        
+        {this.state.alert ? (
+          <Alert severity="success" style={{ width: "100%" }}>
+            {this.state.alert}
+          </Alert>
+        ) : (
+          ""
+        )}
+        {this.state.alertError ? (
+          <Alert severity="error" style={{ width: "100%" }} onClose={()=>this.setState({alertError:''})}>
+            {this.state.alertError}
+          </Alert>
+        ) : (
+          ""
+        )}
+
         {this.state.load ? <CircularProgress style={{ color: "green" }} /> : ""}
 
         <Grid container spacing={0} className="containerCadastro">
-      
           <h1>{this.state.id ? "Alteração de Aluno" : "Cadastro de Aluno"}</h1>
 
           <Grid item xs={10} className="cadastro">
@@ -258,18 +273,25 @@ export default class Cadatro extends React.Component {
               <Button
                 style={{
                   margin: "50px",
-                       color:"#4CAF50",
-                       borderColor:"#4CAF50"
+                  color: "#4CAF50",
+                  borderColor: "#4CAF50",
                 }}
-               
                 variant="outlined"
                 onClick={this.SubmitForm}
               >
                 {this.state.id ? "Alterar" : "Cadastrar"}
-              </Button>{this.state.id?<Button variant="outlined" color="secondary" onClick={this.DeleteUser}>
-                Deletar
-              </Button>:''}
-              
+              </Button>
+              {this.state.id ? (
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={this.DeleteUser}
+                >
+                  Deletar
+                </Button>
+              ) : (
+                ""
+              )}
             </Grid>
           </Grid>
         </Grid>

@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Home from "./home/Home";
 import Alunos from "./alunos/Alunos";
-
+import PlanTraining from './planTraining/PlanTraining'
 import Settings from "./settings/Settings";
 import Cadastro from "./alunos/cadastro/Cadastro";
 import AppBar from "@material-ui/core/AppBar";
@@ -17,6 +17,7 @@ import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import DescriptionIcon from '@material-ui/icons/Description';
 import "./Main.css";
 export default class Main extends React.Component {
   state = {
@@ -26,7 +27,7 @@ export default class Main extends React.Component {
     settings: false,
     cadastrar: false,
     exit: false,
-   
+   planilha:false
   };
   constructor(props) {
     super(props);
@@ -113,6 +114,23 @@ export default class Main extends React.Component {
                           )}
                         </Button>
                       </Link>
+                      <Link to="/planilhas/treino">
+                        {" "}
+                        <Button
+                          onMouseEnter={() => this.toggleTextButton("planilha")}
+                          onMouseLeave={() => this.toggleTextButton("planilha")}
+                        >
+                          <DescriptionIcon />
+                          {this.state.planilha ? (
+                            <strong className="textButtonToggle">
+                              {" "}
+                             Planilhas de Treino
+                            </strong>
+                          ) : (
+                            ""
+                          )}
+                        </Button>
+                      </Link>
                       <Link to="/settings">
                         {" "}
                         <Button
@@ -180,6 +198,7 @@ export default class Main extends React.Component {
                       Alunos
                     </Button>
                   </Link>
+              
                   <Link to="/settings" onClick={this.handleToggle}>
                     {" "}
                     <Button variant="outlined" size="small">
@@ -202,6 +221,9 @@ export default class Main extends React.Component {
                 </Route>
                 <Route path="/alunos">
                   <Alunos />
+                </Route>  
+                <Route path="/planilhas/treino">
+                  <PlanTraining />
                 </Route>               
                 <Route path="/settings">
                   <Settings />
