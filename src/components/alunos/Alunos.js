@@ -10,7 +10,7 @@ import NotFound from "../../assets/not-found.svg";
 import InputBase from "@material-ui/core/InputBase";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
-const baseUrl=require('../../utils/baseUrl')
+import baseUrl from '../../utils/baseUrl'
 export default class Alunos extends React.Component {
   state = {
     alunos: "",

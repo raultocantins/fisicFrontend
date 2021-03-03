@@ -9,7 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Axios from "axios";
 import Button from "@material-ui/core/Button";
-const baseUrl = require('../../utils/baseUrl')
+import baseUrl from '../../utils/baseUrl'
 import SendIcon from "@material-ui/icons/Send";
 
 import LinearProgress from "@material-ui/core/LinearProgress";

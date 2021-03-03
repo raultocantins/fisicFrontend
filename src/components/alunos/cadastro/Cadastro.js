@@ -8,7 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Axios from "axios";
 import "./Cadastro.css";
 import TextField from "@material-ui/core/TextField";
-const baseUrl = require('../../../utils/baseUrl')
+import baseUrl from '../../utils/baseUrl'
 export default class Cadatro extends React.Component {
   state = {
     id: "",
