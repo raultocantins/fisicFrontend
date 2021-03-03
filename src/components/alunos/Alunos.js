@@ -10,7 +10,7 @@ import NotFound from "../../assets/not-found.svg";
 import InputBase from "@material-ui/core/InputBase";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
-import baseUrl from '../../utils/baseUrl'
+import baseUrl, { toLowerCase } from '../../utils/baseUrl'
 export default class Alunos extends React.Component {
   state = {
     alunos: "",
@@ -54,7 +54,7 @@ export default class Alunos extends React.Component {
   }
 
   renderAlunos = (aluno) => {
-    const { search } = this.state;
+    const { search } = toLowerCase(this.state) ;
     if (search !== "" && aluno.name.indexOf(search) === -1) {
       return null;
     }
