@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Axios from "axios";
 import "./Cadastro.css";
 import TextField from "@material-ui/core/TextField";
+const baseUrl = require('../../../utils/baseUrl')
 export default class Cadatro extends React.Component {
   state = {
     id: "",
@@ -40,7 +41,7 @@ export default class Cadatro extends React.Component {
       this.setState({
         load: true,
       });
-      Axios.get(`http://localhost:4000/alunos/${id.id}`)
+      Axios.get(`${baseUrl}/alunos/${id.id}`)
         .then((res) => {
           var day =
             new Date(res.data.age).getDate() >= 10
@@ -80,8 +81,7 @@ export default class Cadatro extends React.Component {
     });
   }
   SubmitForm() {
-    var baseUrl = "http://localhost:4000/alunos";
-
+    
     var aluno = {
       option: this.state.option,
       name: this.state.name,
@@ -106,7 +106,7 @@ export default class Cadatro extends React.Component {
       aluno.height &&
       aluno.fat
     ) {
-      Axios.post(baseUrl, aluno)
+      Axios.post(`${baseUrl}/alunos`, aluno)
         .then((value) => {
           this.setState({
             alert: "Sucesso, você será redirecionado para todos os alunos.",
@@ -127,7 +127,7 @@ export default class Cadatro extends React.Component {
     
   }
   DeleteUser() {
-    Axios.delete(`http://localhost:4000/aluno/${this.state.id}/remove`)
+    Axios.delete(`${baseUrl}/aluno/${this.state.id}/remove`)
       .then((value) => {
         this.setState({
           alert: "Usuário deletado com Sucesso! ",

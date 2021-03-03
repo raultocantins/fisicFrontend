@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CheckIcon from "@material-ui/icons/Check";
+const baseUrl =require('../../../utils/baseUrl')
 import "./Renovar.css";
 export default function RenovarMatricula(props) {
   const [select, setSelect] = useState("1");
@@ -14,8 +15,9 @@ export default function RenovarMatricula(props) {
 
   function RenovarMatricula() {
     setLoading(true);
-    var baseUrl = "http://localhost:4000/aluno";
+    var baseUrl = `${baseUrl}/aluno`;
     var option = select;
+  
     Axios.patch(`${baseUrl}/${data._id}/renovar`, { option })
       .then((res) => {
         setLoading(false);

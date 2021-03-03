@@ -10,6 +10,7 @@ import NotFound from "../../assets/not-found.svg";
 import InputBase from "@material-ui/core/InputBase";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
+const baseUrl=require('../../utils/baseUrl')
 export default class Alunos extends React.Component {
   state = {
     alunos: "",
@@ -21,8 +22,8 @@ export default class Alunos extends React.Component {
   componentDidMount() {
     //var paperAluno= document.getElementsByClassName('gridAlunoItem')
 
-    var baseUrl = "http://localhost:4000/alunos";
-    Axios.get(baseUrl)
+    
+    Axios.get(`${baseUrl}/alunos`)
       .then((res) => {
         this.setState({
           alunos: res.data,
@@ -35,8 +36,8 @@ export default class Alunos extends React.Component {
   }
 
   loadingAlunos() {
-    var baseUrl = "http://localhost:4000/alunos";
-    Axios.get(baseUrl)
+ 
+    Axios.get(`${baseUrl}/alunos`)
       .then((res) => {
         this.setState({
           alunos: res.data,

@@ -2,13 +2,14 @@ import React from "react";
 import Chart from "chart.js";
 import Axios from "axios";
 import CircularProgress from "@material-ui/core/CircularProgress";
+const baseUrl=require('../../utils/baseUrl')
 export default class ChartAlunos extends React.Component {
   state = {
     quantity: '',
   };
 
   componentDidMount() {
-    Axios.get("http://localhost:4000/quantity/alunos")
+    Axios.get(`${baseUrl}/quantity/alunos`)
       .then((res) => {
 this.setState({
     quantity:res.data
