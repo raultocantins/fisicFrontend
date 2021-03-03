@@ -1,4 +1,5 @@
 import React from "react";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Axios from "axios";
 import "./Alunos.css";
@@ -8,9 +9,9 @@ import Cadastro from "./cadastro/Cadastro";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import NotFound from "../../assets/not-found.svg";
 import InputBase from "@material-ui/core/InputBase";
-import InputAdornment from '@material-ui/core/InputAdornment';
-import SearchIcon from '@material-ui/icons/Search';
-import baseUrl from '../../utils/baseUrl'
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+import baseUrl from "../../utils/baseUrl";
 export default class Alunos extends React.Component {
   state = {
     alunos: "",
@@ -22,7 +23,6 @@ export default class Alunos extends React.Component {
   componentDidMount() {
     //var paperAluno= document.getElementsByClassName('gridAlunoItem')
 
-    
     Axios.get(`${baseUrl}/alunos`)
       .then((res) => {
         this.setState({
@@ -36,7 +36,6 @@ export default class Alunos extends React.Component {
   }
 
   loadingAlunos() {
- 
     Axios.get(`${baseUrl}/alunos`)
       .then((res) => {
         this.setState({
@@ -48,29 +47,34 @@ export default class Alunos extends React.Component {
       });
   }
   onchange(e) {
-var value = e.target.value
+    var value = e.target.value;
     this.setState({
-      search:value.toLowerCase(),
+      search: value.toLowerCase(),
     });
   }
 
   renderAlunos = (aluno) => {
-    const { search } = this.state ;
+    const { search } = this.state;
     if (search !== "" && aluno.name.indexOf(search) === -1) {
       return null;
     }
     return (
-      <Paper
-        className={
-          aluno.exp > new Date().getTime()
-            ? "gridAlunoItemTrue"
-            : "gridAlunoItemFalse"
-        }
-        key={aluno._id}
-        elevation={2}
-      >
-        <AlunoItem data={aluno} loadingAlunos={this.loadingAlunos} />
-      </Paper>
+  
+
+    
+    
+        <Paper
+          className={
+            aluno.exp > new Date().getTime()
+              ? "gridAlunoItemTrue"
+              : "gridAlunoItemFalse"
+          }
+          key={aluno._id}
+          elevation={2}
+        >
+          <AlunoItem data={aluno} loadingAlunos={this.loadingAlunos} />
+        </Paper>
+       
     );
   };
 
@@ -95,24 +99,25 @@ var value = e.target.value
             ""
           )}
           <div className="barSearch">
-            
-          <InputBase
-            placeholder="Search Aluno…"
-          className="inputBase"
-            inputProps={{ "aria-label": "search" }}
-            onChange={(e) => this.onchange(e)}
-            startAdornment={
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            }
-          />
+            <InputBase
+              placeholder="Search Aluno…"
+              className="inputBase"
+              inputProps={{ "aria-label": "search" }}
+              onChange={(e) => this.onchange(e)}
+              startAdornment={
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              }
+            />
           </div>
-         
 
           <div className="alunosContent">
+       
             <Switch>
               <Route path="/alunos" exact>
+       
+
                 {this.state.alunos === "" ? (
                   <div
                     style={{
@@ -132,14 +137,25 @@ var value = e.target.value
                     <h1>Nenhum aluno cadastrado !!!</h1>
                   </div>
                 ) : (
-                  this.state.alunos.map((e) => this.renderAlunos(e))
+                  <ReactCSSTransitionGroup
+                  style={{display:'flex',justifyContent:'center',flexWrap:'wrap',alignItems:"center"}}
+                  transitionName="fade"
+                  transitionEnterTimeout={1000}
+                  transitionLeaveTimeout={0}
+                  >
+
+                  {this.state.alunos.map((e) => this.renderAlunos(e))}
+                              
+</ReactCSSTransitionGroup>
                 )}
+
               </Route>
 
               <Route path="/register/aluno">
                 <Cadastro />
               </Route>
             </Switch>
+
           </div>
         </div>
       </Router>
