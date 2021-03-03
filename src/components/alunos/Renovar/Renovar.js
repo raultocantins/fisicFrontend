@@ -14,11 +14,10 @@ export default function RenovarMatricula(props) {
   var data = props.data;
 
   function RenovarMatricula() {
-    setLoading(true);
-    var baseUrl = `${baseUrl}/aluno`;
+    setLoading(true);   
     var option = select;
   
-    Axios.patch(`${baseUrl}/${data._id}/renovar`, { option })
+    Axios.patch(`${baseUrl}/aluno/${data._id}/renovar`, { option })
       .then((res) => {
         setLoading(false);
         setSuccess(true);

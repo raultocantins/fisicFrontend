@@ -10,7 +10,7 @@ import NotFound from "../../assets/not-found.svg";
 import InputBase from "@material-ui/core/InputBase";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
-import baseUrl, { toLowerCase } from '../../utils/baseUrl'
+import baseUrl from '../../utils/baseUrl'
 export default class Alunos extends React.Component {
   state = {
     alunos: "",
@@ -48,13 +48,14 @@ export default class Alunos extends React.Component {
       });
   }
   onchange(e) {
+var value = e.target.value
     this.setState({
-      search: e.target.value,
+      search:value.toLowerCase(),
     });
   }
 
   renderAlunos = (aluno) => {
-    const { search } = toLowerCase(this.state) ;
+    const { search } = this.state ;
     if (search !== "" && aluno.name.indexOf(search) === -1) {
       return null;
     }
