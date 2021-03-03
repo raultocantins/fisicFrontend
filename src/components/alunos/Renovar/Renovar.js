@@ -5,7 +5,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CheckIcon from "@material-ui/icons/Check";
 import "./Renovar.css";
-import baseUrl from '../../utils/baseUrl'
+import baseUrl from '../../../utils/baseUrl'
 export default function RenovarMatricula(props) {
   const [select, setSelect] = useState("1");
   const [success, setSuccess] = useState(false);
